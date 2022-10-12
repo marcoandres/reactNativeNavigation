@@ -7,15 +7,16 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-      <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
+      <Button title="Go to Details" onPress={() => navigation.navigate('Details', {nombre:'Marco', edad: 37 })} />
     </View>
   );
 }
 
-const DetailsScreen = ({ navigation }) => {
+const DetailsScreen = ({ navigation, route }) => {
+  const {nombre, edad} = route.params; //recibimos los parametros
   return (
     <View style={styles.container}>
-      <Text>Details Screen</Text>
+      <Text>about you {nombre} {edad}</Text>
       <Button title="Go to back" onPress={ () => navigation.goBack()} />
     </View>
   );
