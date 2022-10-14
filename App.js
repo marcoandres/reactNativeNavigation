@@ -4,9 +4,27 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const HomeScreen = ({ navigation }) => {
+  const [cont, setCont] = React.useState(0);
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          onPress={() => setCont((c) => c + 1)}
+          title="+1"
+          color="#000"
+        />
+      ),
+    });
+  }, [navigation]);
+
+
+    
+
+
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Home Screen {cont}</Text>
       <Button title="Go to Details" onPress={() => navigation.navigate('Details', {nombre:'Marco', edad: 37 })} />
     </View>
   );
@@ -29,7 +47,18 @@ const App = () =>{
 
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} 
+        options={{
+          headerStyle: {
+            backgroundColor: "#ffeecc"
+          },
+          headerRight: () => (
+            <Button
+              title="+1"
+              color="#000"
+            />
+          )
+        }} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
